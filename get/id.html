@@ -10,7 +10,7 @@
       .then(response => response.json())
       .then(data => {
         var ip = data.ip;
-        var luaTable = '{"ip":"' + ip + '"}';
+        var luaTable = '{\n  "ip": "' + ip + '"\n}';
         document.write('<pre>local bruh = ' + luaTable + '  return bruh</pre>');
       })
       .catch(error => {
