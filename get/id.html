@@ -9,7 +9,8 @@
     fetch('https://api.ipify.org/?format=json')
       .then(response => response.json())
       .then(data => {
-        document.write(data.ip);
+        const ipElement = document.getElementById('ip-address');
+        ipElement.textContent = data.ip;
       })
       .catch(error => {
         console.error('Error fetching IP address:', error);
@@ -18,5 +19,7 @@
 </script>
 </head>
 <body>
+  <h1>IP Address:</h1>
+  <p id="ip-address">Loading...</p>
 </body>
 </html>
